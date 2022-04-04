@@ -107,7 +107,7 @@ int main()
  int main()
 {
 	char str[100];
-	 int j,i,a,b,m;
+	 int i,a,b,m;
 	 gets (str);
 	for (i=0;i<strlen(str);i++)
     {
