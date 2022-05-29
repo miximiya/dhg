@@ -10,10 +10,9 @@ struct Account
 };
 typedef struct Account Account;
 
-Account * head=NULL;//鎸囧悜澶寸粨鐐?
-Account * tail=NULL;//鎸囧悜灏剧粨鐐?
+Account * head=NULL;
+Account * tail=NULL;
 
-//鍔犺浇鎴愬姛杩斿洖1锛屽惁鍒欒繑鍥? 
 void loadData()
 {
 	FILE* fp=fopen("D:/atm.txt","r");
@@ -21,13 +20,12 @@ void loadData()
 	{
 		while(!feof(fp))
 		{
-			//鍒涘缓缁撶偣
 			Account * newNode=(Account *)malloc(sizeof(Account)); 
 			
-			//缁撶偣鍒濆鍖?			newNode->next=NULL;
+				newNode->next=NULL;
 			fscanf(fp,"%s %s\n",newNode->username,newNode->password); 
 			
-			//娣诲姞缁撶偣鍒伴摼琛?			if(head==NULL)
+					if(head==NULL)
 			{
 				head=newNode;
 				tail=newNode;	
@@ -55,7 +53,7 @@ void printLinkedList()
 void saveData()
 {
 	Account * curP=head;
-	FILE* fp=fopen("D:/new.txt","w");//鍩嬩笅浜哹ug 
+	FILE* fp=fopen("D:/new.txt","w");
 	if(fp!=NULL)
 	{
 		Account * curP=head;
