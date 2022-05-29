@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Account
+{
+	char username[100];
+	char password[100];	
+	
+	struct Account * next;
+};
+typedef struct Account Account;
+
+Account * head=NULL;//鎸囧悜澶寸粨鐐?
+Account * tail=NULL;//鎸囧悜灏剧粨鐐?
+
+//鍔犺浇鎴愬姛杩斿洖1锛屽惁鍒欒繑鍥? 
+void loadData()
+{
+	FILE* fp=fopen("D:/atm.txt","r");
+	if(fp!=NULL)
+	{
+		while(!feof(fp))
+		{
+			//鍒涘缓缁撶偣
+			Account * newNode=(Account *)malloc(sizeof(Account)); 
+			
+			//缁撶偣鍒濆鍖?			newNode->next=NULL;
+			fscanf(fp,"%s %s\n",newNode->username,newNode->password); 
+			
+			//娣诲姞缁撶偣鍒伴摼琛?			if(head==NULL)
+			{
+				head=newNode;
+				tail=newNode;	
+			} 
+			else
+			{
+				tail->next=newNode;
+				tail=newNode; 
+			}
+		}
+		fclose(fp);
+	} 
+} 
+
+void printLinkedList()
+{
+	Account * curP=head;
+	while(curP!=NULL)
+	{
+		printf("%s\t%s\n",curP->username,curP->password);
+		curP=curP->next;
+	}
+}
+
+void saveData()
+{
+	Account * curP=head;
+	FILE* fp=fopen("D:/new.txt","w");//鍩嬩笅浜哹ug 
+	if(fp!=NULL)
+	{
+		Account * curP=head;
+		while(curP!=NULL)
+		{
+			fprintf(fp,"%s\t%s\n",curP->username,curP->password);
+			curP=curP->next;
+		}
+		fclose(fp);
+	}
+}
+
+int main()
+{
+	loadData();
+	
+	printLinkedList();
+	
+	saveData();
+	
+	return 0;
+}
